@@ -1,0 +1,192 @@
+// ==========================================================================
+// 1. FONT IMPORTS & PALETTE DEFINITIONS
+// ==========================================================================
+@import url('https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Syne:wght@600;700;800&display=swap');
+
+// Cyber Neon Palette
+$cyber-black:      #06070a;
+$cyber-cockpit:    #0c0e14;
+$cyber-card:       #131722;
+$cyber-card-hover: #191f2e;
+$cyber-card-done:  #15101a;
+$cyber-border:     #1e2433;
+
+$cyber-magenta:    #ff007f;
+$cyber-cyan:       #00f0ff;
+$cyber-purple:     #a855f7;
+
+$cyber-text-main:  #edf2f7;
+$cyber-text-muted: #718096;
+
+// ==========================================================================
+// 2. BOOTSTRAP SASS VARIABLE OVERRIDES
+// ==========================================================================
+
+// Color Theme Overrides
+$primary:       $cyber-magenta;
+$secondary:     $cyber-purple;
+$info:          $cyber-cyan;
+$dark:          $cyber-cockpit;
+$black:         $cyber-black;
+
+// Body & Text
+$body-bg:          $cyber-black;
+$body-color:       $cyber-text-main;
+$font-family-sans-serif: 'DM Mono', monospace;
+$font-family-monospace:  'DM Mono', monospace;
+
+// Borders & Surfaces
+$border-color:     $cyber-border;
+$border-radius:    2px;
+$border-radius-sm: 2px;
+$border-radius-lg: 3px;
+
+// Component Overrides
+$card-bg:                   $cyber-card;
+$card-border-color:         $cyber-border;
+$card-cap-bg:               transparent;
+$modal-content-bg:          $cyber-cockpit;
+$modal-content-border-color:$cyber-magenta;
+$input-bg:                  $cyber-black;
+$input-border-color:        $cyber-border;
+$input-color:               $cyber-cyan;
+$input-focus-border-color:  $cyber-magenta;
+$input-focus-box-shadow:    0 0 0 0.2rem rgba($cyber-magenta, 0.25);
+$form-select-bg:            $cyber-card;
+$form-select-border-color:  $cyber-border;
+$form-select-color:         $cyber-cyan;
+$form-select-indicator-color: $cyber-magenta;
+
+// ==========================================================================
+// 3. IMPORT BOOTSTRAP CORE
+// ==========================================================================
+@import "../node_modules/bootstrap/scss/bootstrap";
+
+// ==========================================================================
+// 4. THEMED NUMBER SPINNERS & CUSTOM UI
+// ==========================================================================
+
+.font-syne {
+  font-family: 'Syne', sans-serif;
+}
+
+// Neon tinted number input arrows
+input[type="number"] {
+  color-scheme: dark;
+
+  &::-webkit-inner-spin-button,
+  &::-webkit-outer-spin-button {
+    filter: invert(1) sepia(1) saturate(5) hue-rotate(290deg) brightness(1.2);
+    cursor: pointer;
+    opacity: 0.85;
+    height: 18px;
+  }
+
+  &:hover::-webkit-inner-spin-button,
+  &:hover::-webkit-outer-spin-button {
+    opacity: 1;
+    filter: invert(1) sepia(1) saturate(8) hue-rotate(290deg) brightness(1.5);
+  }
+}
+
+// Cockpit Navbar and Containers
+.hud-bar {
+  background-color: $cyber-cockpit;
+  border-bottom: 1px solid $cyber-border;
+}
+
+.hud-metric-lbl {
+  font-size: 8px;
+  letter-spacing: 0.08em;
+  color: $cyber-text-muted;
+}
+
+// Arena Agent Cards
+.arena-agent-card {
+  background-color: $cyber-card;
+  border: 1px solid $cyber-border;
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+
+  &:hover {
+    background-color: $cyber-card-hover;
+    border-color: rgba($cyber-magenta, 0.5);
+    transform: translateY(-2px);
+  }
+
+  &.is-leader {
+    border-color: $cyber-magenta;
+  }
+
+  &.is-eliminated {
+    background-color: $cyber-card-done;
+    opacity: 0.55;
+  }
+}
+
+.agent-tag {
+  background-color: rgba($cyber-cyan, 0.15);
+  color: $cyber-cyan;
+}
+
+.leader-star {
+  color: $cyber-magenta;
+}
+
+.agent-stats-strip {
+  font-size: 8px;
+}
+
+// 2048 Game Board & Tiles
+.agent-mini-board {
+  aspect-ratio: 1;
+  background-color: rgba(0, 0, 0, 0.5);
+  padding: 2px;
+  border-radius: 2px;
+}
+
+.mini-board-grid {
+  display: grid;
+  grid-template: repeat(4, 1fr) / repeat(4, 1fr);
+  gap: 2px;
+  height: 100%;
+  width: 100%;
+}
+
+.leader-board {
+  aspect-ratio: 1;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.tile {
+  display: grid;
+  place-items: center;
+  font-family: 'Syne', sans-serif;
+  font-size: 8px;
+  font-weight: 700;
+  background-color: #11141c;
+  color: #4a5568;
+
+  &.tile-2    { background-color: #1a1928; color: #93c5fd; }
+  &.tile-4    { background-color: #251c36; color: #c084fc; }
+  &.tile-8    { background-color: #351644; color: #f472b6; }
+  &.tile-16   { background-color: #45104e; color: #fb7185; }
+  &.tile-32   { background-color: #5c0f53; color: #fda4af; }
+  &.tile-64   { background-color: #7c0b58; color: #fff; }
+  &.tile-128  { background-color: #9c0659; color: #fff; }
+  &.tile-256  { background-color: #bd035d; color: #fff; }
+  &.tile-512  { background-color: #e00063; color: #fff; }
+  &.tile-1024 { background-color: $cyber-magenta; color: #000; }
+  &.tile-2048 { background-color: $cyber-cyan; color: #000; }
+}
+
+// Status Indicator Orbs
+.status-orb {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  display: inline-block;
+
+  &.live { background-color: $cyber-magenta; }
+  &.idle { background-color: $cyber-text-muted; }
+}
